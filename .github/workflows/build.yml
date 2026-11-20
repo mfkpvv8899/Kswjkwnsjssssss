@@ -1,4 +1,4 @@
-name: Build APK
+name: name: Build APK
 
 on:
   push:
@@ -16,11 +16,12 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - uses: android-actions/setup-android@v3
-
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 8.9
+
+      - name: Aceitar licenças do Android SDK
+        run: yes | sdkmanager --licenses > /dev/null || true
 
       - name: Build debug APK
         run: gradle assembleDebug --no-daemon
